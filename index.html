@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind Labs - Inicio</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body class="site-body">
+    <header class="site-header">
+      <div class="container nav-wrapper">
+        <a class="brand" href="./index.html">Tailwind Labs</a>
+        <nav id="menu-principal" class="site-nav">
+          <a href="./index.html">Inicio</a>
+          <a href="./pages/about.html">Sobre el curso</a>
+          <a href="./pages/faq.html">Preguntas frecuentes</a>
+          <a href="./pages/privacy.html">Privacidad</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <section class="hero">
+        <div class="container">
+          <span class="hero-tag">Programacion II</span>
+          <h1>Practica guiada de Tailwind CSS</h1>
+          <p>
+            Esta pagina te sirve como laboratorio para aplicar utilidades de espaciado, flex, grid,
+            responsive, tipografia y estados interactivos.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#servicios-grid">
+              Ver bloques practicos
+            </a>
+            <a class="btn btn-secondary" href="./pages/faq.html">
+              Ir a FAQ
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="container section">
+        <h2>Objetivos de esta ejercitacion</h2>
+        <p class="section-intro">
+          Cada tarjeta esta pensada para que practiques un conjunto de utilidades y aprendas a combinarlas.
+        </p>
+        <div id="servicios-grid" class="cards-grid">
+          <article class="card">
+            <h3>Utilidades de layout</h3>
+            <p>
+              Aplicar contenedores, columnas, gap, alineaciones y distribucion responsive.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Tipografia y color</h3>
+            <p>
+              Definir jerarquia visual con tamaños, pesos, tracking, contraste y fondos.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Estados e interacciones</h3>
+            <p>
+              Mejorar experiencia con hover, focus, transiciones y microinteracciones.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="container section section-last">
+        <div class="highlight-box">
+          <h2>Siguiente paso</h2>
+          <p>
+            Continua con las paginas secundarias para practicar variantes responsive, listas,
+            bloques informativos y consistencia visual en un mini sitio multipagina.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrapper">
+        <p>Programacion II - Ejercitacion Tailwind CSS</p>
+        <p>Comision 2026</p>
+        <p class="student-signature">Desarrollado por [Nombre y Apellido]</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,135 @@
+name: Pruebas automaticas (Classroom)
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+  repository_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Estructura base
+        id: test-base-structure
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: "Existe estructura base multipagina"
+          command: "bash scripts/classroom-check.sh base-structure"
+          expected-output: "CORRECTO"
+          comparison-method: exact
+          timeout: 10
+          max-score: 10
+
+      - name: Tailwind CDN en todas las paginas
+        id: test-tailwind-cdn-all-pages
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: "Uso de CDN de Tailwind en todos los HTML"
+          command: "bash scripts/classroom-check.sh tailwind-cdn-all-pages"
+          expected-output: "CORRECTO"
+          comparison-method: exact
+          timeout: 10
+          max-score: 15
+
+      - name: Sin hoja CSS legacy enlazada
+        id: test-no-legacy-css-link
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: "No se enlaza css/styles.css"
+          command: "bash scripts/classroom-check.sh no-legacy-css-link"
+          expected-output: "CORRECTO"
+          comparison-method: exact
+          timeout: 10
+          max-score: 10
+
+      - name: Layout base en index
+        id: test-index-layout-shell
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: "index con shell responsive base"
+          command: "bash scripts/classroom-check.sh index-layout-shell"
+          expected-output: "CORRECTO"
+          comparison-method: exact
+          timeout: 10
+          max-score: 15
+
+      - name: Grilla de servicios en index
+        id: test-index-services-grid
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: "index con grilla responsive de servicios"
+          command: "bash scripts/classroom-check.sh index-services-grid"
+          expected-output: "CORRECTO"
+          comparison-method: exact
+          timeout: 10
+          max-score: 15
+
+      - name: Grilla de metricas en about
+        id: test-about-stats-grid
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: "about con stats grid responsive"
+          command: "bash scripts/classroom-check.sh about-stats-grid"
+          expected-output: "CORRECTO"
+          comparison-method: exact
+          timeout: 10
+          max-score: 10
+
+      - name: FAQ con divisores y hover
+        id: test-faq-list-style
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: "faq con lista estilizada"
+          command: "bash scripts/classroom-check.sh faq-list-style"
+          expected-output: "CORRECTO"
+          comparison-method: exact
+          timeout: 10
+          max-score: 10
+
+      - name: Privacidad con tarjetas y listas
+        id: test-privacy-cards-lists
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: "privacy con cards y listas accesibles"
+          command: "bash scripts/classroom-check.sh privacy-cards-lists"
+          expected-output: "CORRECTO"
+          comparison-method: exact
+          timeout: 10
+          max-score: 15
+
+      - name: Firma personalizada del alumno
+        id: test-footer-signature
+        uses: classroom-resources/autograding-io-grader@v1
+        with:
+          test-name: "Footer con firma real del alumno"
+          command: "bash scripts/classroom-check.sh footer-signature"
+          expected-output: "CORRECTO"
+          comparison-method: exact
+          timeout: 10
+          max-score: 10
+
+      - name: Reporte para GitHub Classroom
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          TEST-BASE-STRUCTURE_RESULTS: "${{ steps.test-base-structure.outputs.result }}"
+          TEST-TAILWIND-CDN-ALL-PAGES_RESULTS: "${{ steps.test-tailwind-cdn-all-pages.outputs.result }}"
+          TEST-NO-LEGACY-CSS-LINK_RESULTS: "${{ steps.test-no-legacy-css-link.outputs.result }}"
+          TEST-INDEX-LAYOUT-SHELL_RESULTS: "${{ steps.test-index-layout-shell.outputs.result }}"
+          TEST-INDEX-SERVICES-GRID_RESULTS: "${{ steps.test-index-services-grid.outputs.result }}"
+          TEST-ABOUT-STATS-GRID_RESULTS: "${{ steps.test-about-stats-grid.outputs.result }}"
+          TEST-FAQ-LIST-STYLE_RESULTS: "${{ steps.test-faq-list-style.outputs.result }}"
+          TEST-PRIVACY-CARDS-LISTS_RESULTS: "${{ steps.test-privacy-cards-lists.outputs.result }}"
+          TEST-FOOTER-SIGNATURE_RESULTS: "${{ steps.test-footer-signature.outputs.result }}"
+        with:
+          runners: test-base-structure,test-tailwind-cdn-all-pages,test-no-legacy-css-link,test-index-layout-shell,test-index-services-grid,test-about-stats-grid,test-faq-list-style,test-privacy-cards-lists,test-footer-signature
